@@ -1,13 +1,50 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../Header/header";
-import SelectCountry  from "react-select-country-list";
+import SelectCountry from "react-select-country-list";
 import Footer from "../Footer/footer";
 
 const Signup = () => {
   const options = SelectCountry().getData();
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    gender: "",
+    dateOfBirth: "",
+    country: "",
+    email: "",
+    username: "",
+    password: ""
+  });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('your-django-api-url/signup/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+      if (response.ok) {
+        // Handle successful signup, e.g., show success message or redirect
+        console.log('Signup successful');
+      } else {
+        // Handle signup failure, e.g., show error message
+        console.error('Signup failed');
+      }
+    } catch (error) {
+      console.error('Error during signup:', error);
+    }
+  };
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+
   return (
     <main className="main" id="top">
-      <Header/>
+      <Header />
       <section className="py-8">
         <div className="container">
           <div className="row">
@@ -15,54 +52,54 @@ const Signup = () => {
             </div>
             <div className="col-lg-6 z-index-2 mb-5"><img className="w-100" src={`${process.env.PUBLIC_URL}/assets/img/gallery/appointment.png`} alt="..." /></div>
             <div className="col-lg-6 z-index-2">
-              <form className="row g-3">
+              <form className="row g-3" style={{ marginTop: '5rem' }} onSubmit={handleSubmit}>
                 <div className="col-md-6">
-                  <label className="visually-hidden" htmlFor="fname">First Name</label>
-                  <input className="form-control form-livedoc-control" id="fname" type="text" placeholder="First Name" />
+                  <label className="visually-hidden" htmlFor="firstName">First Name</label>
+                  <input className="form-control form-livedoc-control" id="firstName" type="text" placeholder="First Name" value={formData.firstName} onChange={handleChange} />
                 </div>
                 <div className="col-md-6">
-                  <label className="visually-hidden" htmlFor="lname">Last Name</label>
-                  <input className="form-control form-livedoc-control" id="lname" type="text" placeholder="Last Name" />
+                  <label className="visually-hidden" htmlFor="lastName">Last Name</label>
+                  <input className="form-control form-livedoc-control" id="lastName" type="text" placeholder="Last Name" value={formData.lastName} onChange={handleChange} />
                 </div>
                 <div className="col-md-6">
                   <label className="form-label visually-hidden" htmlFor="gender">Gender</label>
-                  <select className="form-select" id="gender">
-                    <option selected="selected">Gender</option>
+                  <select className="form-select" id="gender" value={formData.gender} onChange={handleChange}>
+                    <option disabled selected>Select Gender</option>
                     <option>Male</option>
                     <option>Female</option>
+                    <option>Other</option>
                   </select>
                 </div>
                 <div className="col-md-6">
-                  <label className="form-label visually-hidden" htmlFor="date">Date of birth</label>
-                  <input className="form-control form-livedoc-control" id="date" type="date" placeholder="Date of birth" />
+                  <label className="form-label visually-hidden" htmlFor="dateOfBirth">Date of birth</label>
+                  <input className="form-control form-livedoc-control" id="dateOfBirth" type="date" placeholder="Date of birth" value={formData.dateOfBirth} onChange={handleChange} />
                 </div>
                 <div className="col-md-6">
-                <label className="form-label visually-hidden" htmlFor="country">Select Country:</label>
-      <select className="form-select" id="country">
-      <option value="" disabled selected>Select Country</option>
-        {options.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.label}
-          </option>
-        ))}
-      </select>
-
-      </div>
+                  <label className="form-label visually-hidden" htmlFor="country">Select Country:</label>
+                  <select className="form-select" id="country" value={formData.country} onChange={handleChange}>
+                    <option value="" disabled selected>Select Country</option>
+                    {options.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
                 <div className="col-md-6">
                   <label className="form-label visually-hidden" htmlFor="email">Email</label>
-                  <input className="form-control form-livedoc-control" id="email" type="email" placeholder="Email" />
+                  <input className="form-control form-livedoc-control" id="email" type="email" placeholder="Email" value={formData.email} onChange={handleChange} />
                 </div>
                 <div className="col-md-6">
-                  <label className="form-label visually-hidden" htmlFor="pwd">Password</label>
-                  <input className="form-control form-livedoc-control" id="pwd" type="password" placeholder="Password" />
+                  <label className="form-label visually-hidden" htmlFor="username">Username</label>
+                  <input className="form-control form-livedoc-control" id="username" type="text" placeholder="Username" value={formData.username} onChange={handleChange} />
                 </div>
                 <div className="col-md-6">
-                  <label className="form-label visually-hidden" htmlFor="cpwd">Confirm password</label>
-                  <input className="form-control form-livedoc-control" id="cpwd" type="password" placeholder="Confirm password" />
+                  <label className="form-label visually-hidden" htmlFor="password">Password</label>
+                  <input className="form-control form-livedoc-control" id="password" type="password" placeholder="Password" value={formData.password} onChange={handleChange} />
                 </div>
                 <div className="col-12">
                   <div className="d-grid">
-                    <button className="btn btn-primary rounded-pill" type="submit">Sign in</button>
+                    <button className="btn btn-primary rounded-pill" type="submit">Sign Up</button>
                   </div>
                 </div>
               </form>
