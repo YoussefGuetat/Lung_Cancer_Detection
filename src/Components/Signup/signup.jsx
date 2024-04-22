@@ -49,7 +49,7 @@ const Signup = () => {
           <div className="row">
             <div className="bg-holder bg-size" style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/assets/img/gallery/dot-bg.png)`, backgroundPosition: "bottom right", backgroundSize: "auto" }}>
             </div>
-            <div className="col-lg-6 z-index-2 mb-5"><img className="w-100" src={`${process.env.PUBLIC_URL}/assets/img/gallery/appointment.png`} alt="..." /></div>
+            <div className="col-lg-6 z-index-2 mb-5"><img className="w-100" src={`${process.env.PUBLIC_URL}/assets/img/gallery/medecins.jpeg`} alt="..." /></div>
             <div className="col-lg-6 z-index-2">
               <form className="row g-3" style={{ marginTop: '5rem' }} onSubmit={handleSubmit}>
                 <div className="col-md-6">

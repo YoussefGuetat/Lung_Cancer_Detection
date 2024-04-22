@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Signup from './Components/Signup/signup';
+import SignIn from './Components/SignIn/SignIn';
 import Team from './Components/Team/team';
 import Chatbot from './Components/ChatBot/chatbot';
 
@@ -17,6 +18,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/signup" element={<Signup />} />
+        <Route path="/SignIn" element={<SignIn />} />
         <Route path="/" element={<IndexHtml />} />
         <Route path="/team" element={<Team />} />
         <Route path="/chatbot" element={<Chatbot />} />
