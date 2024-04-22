@@ -64,9 +64,9 @@ const Signup = () => {
                   <label className="form-label visually-hidden" htmlFor="gender">Gender</label>
                   <select className="form-select" id="gender" value={formData.gender} onChange={handleChange}>
                     <option >Select Gender</option>
-                    <option>Male</option>
-                    <option>Female</option>
-                    <option>Other</option>
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                    <option value="O">Other</option>
                   </select>
                 </div>
                 <div className="col-md-6">
