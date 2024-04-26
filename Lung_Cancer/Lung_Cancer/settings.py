@@ -100,7 +100,10 @@ DATABASES = {
        'default': {
            'ENGINE': 'djongo',
            'NAME': 'Lung_Cancer',
-           'HOST': 'mongodb://localhost:27017',
+             'CLIENT': {
+                'host': 'mongodb+srv://essylsaidi:nkK5rIGajZuqEhoG@cluster0.pk3tjrb.mongodb.net/',
+            }  
+       
        }
    }
 
