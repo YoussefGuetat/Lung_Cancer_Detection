@@ -10,7 +10,7 @@ const Chatbot = () => {
   useEffect(() => {
     createSession();
   }, []); // Appelé uniquement au chargement initial
-
+    
   const projectId = 'rugged-reality-334720';
   const apiUrl = `https://dialogflow.googleapis.com/v2/projects/${projectId}/agent/sessions/${sessionId || ''}:detectIntent`;
 
