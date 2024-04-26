@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 
 const Footer = () => {
   return (
@@ -15,7 +16,7 @@ const Footer = () => {
             <h5 className="lh-lg fw-bold mb-4 text-light font-sans-serif">Departments</h5>
             <ul className="list-unstyled mb-md-4 mb-lg-0">
               <li className="lh-lg"><a className="footer-link" href="#!">Eye care</a></li>
-              <li className="lh-lg"><a className="footer-link" href="#!">Cardiac are</a></li>
+              <li className="lh-lg"><a className="footer-link" href="#!">Cardiac care</a></li>
               <li className="lh-lg"><a className="footer-link" href="#!">Heart care</a></li>
             </ul>
           </div>
@@ -54,6 +55,24 @@ const Footer = () => {
           </div>
         </div>
       </section>
+
+      <Helmet>
+        <script type="text/javascript">
+          {`
+            window.embeddedChatbotConfig = {
+              chatbotId: "poz7FOSspx_DvjrH6Ov7g",
+              domain: "www.chatbase.co"
+            };
+          `}
+        </script>
+        <script
+          type="text/javascript"
+          src="https://www.chatbase.co/embed.min.js"
+          chatbotId="poz7FOSspx_DvjrH6Ov7g"
+          domain="www.chatbase.co"
+          defer
+        ></script>
+      </Helmet>
     </section>
   );
 };
