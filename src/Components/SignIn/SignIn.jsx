@@ -4,14 +4,14 @@ import Footer from "../Footer/footer";
 import userServices from "../Services/user-services";
 
 const SignIn = () => {
-    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState(''); // Changed 'email' to 'username'
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    const handleEmailChange = (e) => {
-        setEmail(e.target.value);
+    const handleUsernameChange = (e) => {
+        setUsername(e.target.value);
     };
 
     const handlePasswordChange = (e) => {
@@ -19,18 +19,19 @@ const SignIn = () => {
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        e.preventDefault(); 
         setIsLoading(true);
         setError('');
 
         try {
-            const response = await userServices.signIn(email, password);
+            const response = await userServices.login(username, password); 
 
-            if (response.success) {
+            if (response.token) {
                 setIsLoggedIn(true);
                 console.log("Login successful");
             } else {
-                setError("Invalid email or password");
+                setError("Invalid username or password"); 
+                console.log(response)
             }
         } catch (error) {
             console.error("Error occurred while signing in:", error);
@@ -48,7 +49,7 @@ const SignIn = () => {
                     <div className="row">
                         <div className="bg-holder bg-size" style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/assets/img/gallery/dot-bg.png)`, backgroundPosition: "bottom left", backgroundSize: "auto" }}>
                         </div>
-                                    <div className="col-lg-6 z-index-2 mb-5"><img className="w-100" src={`${process.env.PUBLIC_URL}/assets/img/gallery/poumons.jpg`} alt="..." /></div>
+                        <div className="col-lg-6 z-index-2 mb-5"><img className="w-100" src={`${process.env.PUBLIC_URL}/assets/img/gallery/poumons.jpg`} alt="..." /></div>
                         <div className="col-lg-6 z-index-2 mb-5">
                             <h1>Sign In</h1>
                             {error && <p style={{ color: 'red' }}>{error}</p>}
@@ -59,11 +60,9 @@ const SignIn = () => {
                             ) : (
                                 <form className="row g-3" style={{ marginTop: '5rem' }} onSubmit={handleSubmit}>
                                     <div className="col-md-6">
-                                        <label className="visually-hidden" htmlFor="email">Email:</label>
-                                        <input className="form-control form-livedoc-control" id="email" type="email" placeholder="Email" value={email} onChange={handleEmailChange} />
+                                        <label className="visually-hidden" htmlFor="username">Username:</label> {/* Changed 'Email' to 'Username' */}
+                                        <input className="form-control form-livedoc-control" id="username" type="text" placeholder="Username" value={username} onChange={handleUsernameChange} /> {/* Changed 'email' to 'username' */}
                                     </div>
-                                  
-                                    <br />
                                     <div className="col-md-6">
                                         <label className="visually-hidden" htmlFor="password">Password:</label>
                                         <input className="form-control form-livedoc-control" id="password" type="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
